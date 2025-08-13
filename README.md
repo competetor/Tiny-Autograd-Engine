@@ -17,7 +17,7 @@ This repository implements a minimal automatic differentiation engine inspired b
 Run an example:
 
 ```bash
-python examples/xor.py --epochs 300       # XOR classification (override epochs if desired)
+python examples/xor.py --epochs 300       # XOR classification
 python examples/moons.py --epochs 500     # two-moons classification
 ```
 
@@ -33,4 +33,3 @@ python tests/test_optim.py
 python tests/test_tensor.py
 python tests/test_serialization.py
 ```
-
