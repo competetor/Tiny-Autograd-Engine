@@ -41,3 +41,19 @@ class MLP:
 
     def parameters(self) -> List[Value]:
         return [p for layer in self.layers for p in layer.parameters()]
+
+    # serialization utilities
+    def save(self, path: str) -> None:
+        import pickle
+        with open(path, 'wb') as f:
+            pickle.dump([p.data for p in self.parameters()], f)
+
+    @classmethod
+    def load(cls, path: str, n_inputs: int, sizes: Iterable[int]) -> 'MLP':
+        import pickle
+        model = cls(n_inputs, sizes)
+        with open(path, 'rb') as f:
+            data = pickle.load(f)
+        for p, d in zip(model.parameters(), data):
+            p.data = d
+        return model

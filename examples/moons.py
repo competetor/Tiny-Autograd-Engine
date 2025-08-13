@@ -1,7 +1,8 @@
 """Train an MLP on a two-moons dataset."""
+import argparse
 import math
 import random
-from autograd import Value, MLP
+from autograd import Value, MLP, Adam
 
 random.seed(0)
 
@@ -27,17 +28,22 @@ def make_moons(n_samples: int = 100, noise: float = 0.1):
 
 data = make_moons(20, noise=0.1)
 model = MLP(2, [8, 8, 1])
-learning_rate = 0.05
+optimizer = Adam(model.parameters(), lr=0.05)
 
-for epoch in range(50):
+parser = argparse.ArgumentParser(description="two-moons training example")
+parser.add_argument(
+    "--epochs", type=int, default=500, help="number of training epochs (default: 500)"
+)
+args = parser.parse_args()
+
+for epoch in range(args.epochs):
     total_loss = Value(0.0)
     for x1, x2, label in data:
         y_pred = model([Value(x1), Value(x2)])
         total_loss = total_loss + (y_pred - label) ** 2
     total_loss.backward()
-    for p in model.parameters():
-        p.data -= learning_rate * p.grad
-        p.grad = 0.0
+    optimizer.step()
+    optimizer.zero_grad()
     if epoch % 10 == 0:
         print(epoch, total_loss.data)
 

@@ -1,0 +1,19 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    - run: pip install numpy
+    - run: python tests/test_value.py
+    - run: python tests/test_mlp.py
+    - run: python tests/test_primitives.py
+    - run: python tests/test_optim.py
+    - run: python tests/test_tensor.py
+    - run: python tests/test_serialization.py

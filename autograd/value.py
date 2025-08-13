@@ -76,6 +76,32 @@ class Value:
         out._backward = _backward
         return out
 
+    # --- Additional primitives ---
+    def relu(self) -> 'Value':
+        out = Value(self.data if self.data > 0 else 0.0, {self}, 'relu')
+
+        def _backward():
+            self.grad += (1.0 if self.data > 0 else 0.0) * out.grad
+        out._backward = _backward
+        return out
+
+    def sigmoid(self) -> 'Value':
+        s = 1.0 / (1.0 + math.exp(-self.data))
+        out = Value(s, {self}, 'sigmoid')
+
+        def _backward():
+            self.grad += s * (1 - s) * out.grad
+        out._backward = _backward
+        return out
+
+    def log(self) -> 'Value':
+        out = Value(math.log(self.data), {self}, 'log')
+
+        def _backward():
+            self.grad += (1 / self.data) * out.grad
+        out._backward = _backward
+        return out
+
     def backward(self) -> None:
         topo: List[Value] = []
         visited: Set[Value] = set()

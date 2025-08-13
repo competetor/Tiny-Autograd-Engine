@@ -1,6 +1,7 @@
 """Train a tiny neural network to learn XOR using the autograd engine."""
+import argparse
 import random
-from autograd import Value
+from autograd import Value, SGD
 
 random.seed(0)
 
@@ -18,8 +19,15 @@ b1 = [Value(0.0) for _ in range(3)]
 w2 = [Value(random.uniform(-1, 1)) for _ in range(3)]  # 3x1 output layer weights
 b2 = Value(0.0)
 
-learning_rate = 0.1
-for epoch in range(100):
+parser = argparse.ArgumentParser(description="XOR training example")
+parser.add_argument(
+    "--epochs", type=int, default=300, help="number of training epochs (default: 300)"
+)
+args = parser.parse_args()
+
+params = w1 + b1 + w2 + [b2]
+optimizer = SGD(params, lr=0.1)
+for epoch in range(args.epochs):
     total_loss = Value(0.0)
     for x1, x2, y in inputs:
         # forward pass
@@ -33,11 +41,8 @@ for epoch in range(100):
         total_loss = total_loss + loss
     total_loss.backward()
 
-    # gradient descent
-    params = w1 + b1 + w2 + [b2]
-    for p in params:
-        p.data -= learning_rate * p.grad
-        p.grad = 0.0
+    optimizer.step()
+    optimizer.zero_grad()
 
     if epoch % 20 == 0:
         print(epoch, total_loss.data)
