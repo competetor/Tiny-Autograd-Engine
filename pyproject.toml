@@ -1,0 +1,11 @@
+[project]
+name = "tiny-autograd-engine"
+version = "0.1.0"
+description = "Educational autograd engine"
+authors = [{name = "Tiny"}]
+requires-python = ">=3.8"
+dependencies = ["numpy"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
