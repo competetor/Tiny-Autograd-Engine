@@ -52,14 +52,6 @@ params = w1 + b1 + w2 + [b2]
 optimizer = SGD(params, lr=0.1)
 for epoch in range(args.epochs):
     total_loss = Value(0.0)
-    for x1, x2, y in inputs:
-        # forward pass
-        h = []
-        for i in range(3):
-            v = w1[2 * i] * x1 + w1[2 * i + 1] * x2 + b1[i]
-            h.append(act(v))
-        out = sum((h[i] * w2[i] for i in range(3)), b2)
-        y_pred = act(out)
     for x1, x2, y in train_data:
         y_pred = forward(x1, x2)
         loss = (y_pred - y) ** 2
@@ -70,7 +62,6 @@ for epoch in range(args.epochs):
     optimizer.zero_grad()
 
     if epoch % 20 == 0:
-        print(epoch, total_loss.data)
         print(epoch, total_loss.data)
 
 correct = 0
