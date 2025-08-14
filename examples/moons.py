@@ -27,14 +27,21 @@ def make_moons(n_samples: int = 100, noise: float = 0.1):
 
 
 data = make_moons(20, noise=0.1)
-model = MLP(2, [8, 8, 1])
-optimizer = Adam(model.parameters(), lr=0.05)
 
 parser = argparse.ArgumentParser(description="two-moons training example")
 parser.add_argument(
     "--epochs", type=int, default=500, help="number of training epochs (default: 500)"
 )
+parser.add_argument(
+    "--activation",
+    choices=["tanh", "relu", "sigmoid", "exp", "log", "sin", "cos"],
+    default="tanh",
+    help="activation function for MLP",
+)
 args = parser.parse_args()
+
+model = MLP(2, [8, 8, 1], activation=args.activation)
+optimizer = Adam(model.parameters(), lr=0.05)
 
 for epoch in range(args.epochs):
     total_loss = Value(0.0)

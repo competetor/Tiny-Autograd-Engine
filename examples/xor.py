@@ -23,7 +23,17 @@ parser = argparse.ArgumentParser(description="XOR training example")
 parser.add_argument(
     "--epochs", type=int, default=300, help="number of training epochs (default: 300)"
 )
+parser.add_argument(
+    "--activation",
+    choices=["tanh", "relu", "sigmoid", "exp", "log", "sin", "cos"],
+    default="tanh",
+    help="activation function to apply",
+)
 args = parser.parse_args()
+
+
+def act(v: Value) -> Value:
+    return getattr(v, args.activation)()
 
 params = w1 + b1 + w2 + [b2]
 optimizer = SGD(params, lr=0.1)
@@ -33,10 +43,10 @@ for epoch in range(args.epochs):
         # forward pass
         h = []
         for i in range(3):
-            v = w1[2*i] * x1 + w1[2*i+1] * x2 + b1[i]
-            h.append(v.tanh())
+            v = w1[2 * i] * x1 + w1[2 * i + 1] * x2 + b1[i]
+            h.append(act(v))
         out = sum((h[i] * w2[i] for i in range(3)), b2)
-        y_pred = out.tanh()
+        y_pred = act(out)
         loss = (y_pred - y) ** 2
         total_loss = total_loss + loss
     total_loss.backward()

@@ -1,25 +1,26 @@
 from __future__ import annotations
 import random
-from typing import Iterable, List
+from typing import Iterable, List, Union
 from .value import Value
 
 class Neuron:
-    """A single fully connected neuron with tanh activation."""
-    def __init__(self, n_inputs: int):
+    """A single fully connected neuron with configurable activation."""
+    def __init__(self, n_inputs: int, activation: str = "tanh"):
         self.w = [Value(random.uniform(-1, 1)) for _ in range(n_inputs)]
         self.b = Value(0.0)
+        self.activation = activation
 
     def __call__(self, x: List[Value]) -> Value:
         act = sum((wi * xi for wi, xi in zip(self.w, x)), self.b)
-        return act.tanh()
+        return getattr(act, self.activation)()
 
     def parameters(self) -> List[Value]:
         return self.w + [self.b]
 
 class Layer:
     """A layer of neurons."""
-    def __init__(self, n_inputs: int, n_outputs: int):
-        self.neurons = [Neuron(n_inputs) for _ in range(n_outputs)]
+    def __init__(self, n_inputs: int, n_outputs: int, activation: str = "tanh"):
+        self.neurons = [Neuron(n_inputs, activation) for _ in range(n_outputs)]
 
     def __call__(self, x: List[Value]) -> List[Value]:
         return [n(x) for n in self.neurons]
@@ -29,9 +30,14 @@ class Layer:
 
 class MLP:
     """A simple multilayer perceptron."""
-    def __init__(self, n_inputs: int, sizes: Iterable[int]):
+    def __init__(self, n_inputs: int, sizes: Iterable[int], activation: Union[str, Iterable[str]] = "tanh"):
         sz = [n_inputs] + list(sizes)
-        self.layers = [Layer(sz[i], sz[i+1]) for i in range(len(sz) - 1)]
+        if isinstance(activation, str):
+            activations = [activation] * len(sizes)
+        else:
+            activations = list(activation)
+            assert len(activations) == len(sizes)
+        self.layers = [Layer(sz[i], sz[i+1], activations[i]) for i in range(len(sz) - 1)]
 
     def __call__(self, x: List[Value]) -> Value:
         for layer in self.layers:

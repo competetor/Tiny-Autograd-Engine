@@ -6,7 +6,7 @@ This repository implements a minimal automatic differentiation engine inspired b
 - Scalar operations with gradients (addition, subtraction, multiplication, division, power, `tanh`, `exp`, `relu`, `sigmoid`, `log`, `sin`, `cos`).
 - Topological backpropagation.
 - `Tensor` container for vectorized elementwise operations.
-- `Neuron`, `Layer` and `MLP` classes for quickly assembling networks.
+- `Neuron`, `Layer` and `MLP` classes with configurable activations for quickly assembling networks.
 - Optimizers (`SGD`, `Adam`) to streamline training loops.
 - Save and load utilities for `MLP` parameters.
 - Example scripts training networks on XOR and a two-moons dataset.
@@ -17,11 +17,11 @@ This repository implements a minimal automatic differentiation engine inspired b
 Run an example:
 
 ```bash
-python examples/xor.py --epochs 300       # XOR classification (override epochs if desired)
-python examples/moons.py --epochs 500     # two-moons classification
+python examples/xor.py --epochs 300 --activation tanh       # XOR classification
+python examples/moons.py --epochs 500 --activation tanh     # two-moons classification
 ```
 
-Both scripts accept a `--epochs` flag to control training duration; defaults are 300 for XOR and 500 for the two-moons task.
+Both scripts accept `--epochs` to control training duration and `--activation` to pick a primitive (`tanh`, `relu`, `sigmoid`, `exp`, `log`, `sin`, `cos`). Defaults are 300 epochs and `tanh` for XOR, 500 epochs and `tanh` for two-moons.
 
 Run tests with:
 
