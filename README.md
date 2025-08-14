@@ -23,6 +23,18 @@ python examples/moons.py --epochs 500 --activation tanh     # two-moons classifi
 
 Both scripts accept `--epochs` to control training duration and `--activation` to pick a primitive (`tanh`, `relu`, `sigmoid`, `exp`, `log`, `sin`, `cos`). The `log` option applies `log(|x| + 1)` to avoid invalid inputs. Defaults are 300 epochs and `tanh` for XOR, 500 epochs and `tanh` for two-moons.
 
+### XOR training example
+
+`examples/xor.py` shuffles the four XOR pairs into `train_data` and `test_data`.
+The network trains on the former and reports classification accuracy on the
+held-out `test_data` once training concludes.
+
+### Two-moons training example
+
+`examples/moons.py` creates separate training and test splits. The model is
+trained on `train_data` and reports classification accuracy on the held-out
+`test_data` after training.
+
 Run tests with:
 
 ```bash
