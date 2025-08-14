@@ -20,3 +20,8 @@ def test_adam_converges():
         loss.backward()
         opt.step()
     assert abs(w.data + 2.0) < 1e-2
+
+if __name__ == "__main__":
+    test_sgd_converges()
+    test_adam_converges()
+    print("All tests passed.")

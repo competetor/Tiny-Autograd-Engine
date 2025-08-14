@@ -22,6 +22,5 @@ def test_mlp_xor():
     preds = [1.0 if model([Value(x1), Value(x2)]).data > 0.5 else 0.0 for x1, x2, _ in data]
     assert preds == [0.0, 1.0, 1.0, 0.0]
 
-
 if __name__ == "__main__":
     test_mlp_xor()

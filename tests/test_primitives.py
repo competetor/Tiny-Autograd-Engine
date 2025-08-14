@@ -53,3 +53,8 @@ def test_div_sin_cos():
     y.backward()
     assert abs(y.data - math.cos(0.5)) < 1e-6
     assert abs(x.grad + math.sin(0.5)) < 1e-6
+
+if __name__ == "__main__":
+    test_relu_sigmoid_log()
+    test_div_sin_cos()
+    print("All tests passed.")  

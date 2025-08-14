@@ -9,3 +9,7 @@ def test_tensor_ops():
     assert s.data == 13
     assert t1.data[0].grad == 3
     assert t1.data[1].grad == 4
+
+if __name__ == "__main__":
+    test_tensor_ops()
+    print("All tests passed.")
