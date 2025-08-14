@@ -3,6 +3,14 @@ import random
 from typing import Iterable, List, Union
 from .value import Value
 
+
+def _apply_activation(v: Value, name: str) -> Value:
+    """Apply an activation, handling domain restrictions."""
+    if name == "log":
+        # log(|x| + 1) ensures the argument is positive
+        return ((v.relu() + (-v).relu()) + 1.0).log()
+    return getattr(v, name)()
+
 class Neuron:
     """A single fully connected neuron with configurable activation."""
     def __init__(self, n_inputs: int, activation: str = "tanh"):
@@ -12,7 +20,7 @@ class Neuron:
 
     def __call__(self, x: List[Value]) -> Value:
         act = sum((wi * xi for wi, xi in zip(self.w, x)), self.b)
-        return getattr(act, self.activation)()
+        return _apply_activation(act, self.activation)
 
     def parameters(self) -> List[Value]:
         return self.w + [self.b]

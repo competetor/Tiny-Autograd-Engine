@@ -21,7 +21,7 @@ python examples/xor.py --epochs 300 --activation tanh       # XOR classification
 python examples/moons.py --epochs 500 --activation tanh     # two-moons classification
 ```
 
-Both scripts accept `--epochs` to control training duration and `--activation` to pick a primitive (`tanh`, `relu`, `sigmoid`, `exp`, `log`, `sin`, `cos`). Defaults are 300 epochs and `tanh` for XOR, 500 epochs and `tanh` for two-moons.
+Both scripts accept `--epochs` to control training duration and `--activation` to pick a primitive (`tanh`, `relu`, `sigmoid`, `exp`, `log`, `sin`, `cos`). The `log` option applies `log(|x| + 1)` to avoid invalid inputs. Defaults are 300 epochs and `tanh` for XOR, 500 epochs and `tanh` for two-moons.
 
 Run tests with:
 

@@ -33,6 +33,8 @@ args = parser.parse_args()
 
 
 def act(v: Value) -> Value:
+    if args.activation == "log":
+        return ((v.relu() + (-v).relu()) + 1.0).log()
     return getattr(v, args.activation)()
 
 params = w1 + b1 + w2 + [b2]
