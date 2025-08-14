@@ -49,6 +49,19 @@ class Value:
     def __rmul__(self, other: float) -> 'Value':
         return self * other
 
+    def __truediv__(self, other: 'Value' | float) -> 'Value':
+        other = other if isinstance(other, Value) else Value(other)
+        out = Value(self.data / other.data, {self, other}, '/')
+
+        def _backward():
+            self.grad += (1 / other.data) * out.grad
+            other.grad -= (self.data / (other.data ** 2)) * out.grad
+        out._backward = _backward
+        return out
+
+    def __rtruediv__(self, other: float) -> 'Value':
+        return Value(other) / self
+
     def __pow__(self, power: float) -> 'Value':
         assert isinstance(power, (int, float)), "only supporting int/float powers"
         out = Value(self.data ** power, {self}, f'**{power}')
@@ -99,6 +112,24 @@ class Value:
 
         def _backward():
             self.grad += (1 / self.data) * out.grad
+        out._backward = _backward
+        return out
+
+    def sin(self) -> 'Value':
+        s = math.sin(self.data)
+        out = Value(s, {self}, 'sin')
+
+        def _backward():
+            self.grad += math.cos(self.data) * out.grad
+        out._backward = _backward
+        return out
+
+    def cos(self) -> 'Value':
+        c = math.cos(self.data)
+        out = Value(c, {self}, 'cos')
+
+        def _backward():
+            self.grad -= math.sin(self.data) * out.grad
         out._backward = _backward
         return out
 

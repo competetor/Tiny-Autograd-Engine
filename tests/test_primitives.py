@@ -28,3 +28,28 @@ def test_relu_sigmoid_log():
     y.backward()
     assert abs(y.data - math.log(2.0)) < 1e-6
     assert abs(x.grad - 0.5) < 1e-6
+
+
+def test_div_sin_cos():
+    # division
+    x = Value(6.0)
+    y = Value(2.0)
+    z = x / y
+    z.backward()
+    assert abs(z.data - 3.0) < 1e-6
+    assert abs(x.grad - 0.5) < 1e-6
+    assert abs(y.grad + 1.5) < 1e-6
+
+    # sin
+    x = Value(0.5)
+    y = x.sin()
+    y.backward()
+    assert abs(y.data - math.sin(0.5)) < 1e-6
+    assert abs(x.grad - math.cos(0.5)) < 1e-6
+
+    # cos
+    x = Value(0.5)
+    y = x.cos()
+    y.backward()
+    assert abs(y.data - math.cos(0.5)) < 1e-6
+    assert abs(x.grad + math.sin(0.5)) < 1e-6

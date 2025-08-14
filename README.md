@@ -3,7 +3,7 @@
 This repository implements a minimal automatic differentiation engine inspired by micrograd. It provides a `Value` class supporting basic operations and backpropagation, along with simple neural network building blocks.
 
 ## Features
-- Scalar operations with gradients (addition, multiplication, power, `tanh`, `exp`, `relu`, `sigmoid`, `log`).
+- Scalar operations with gradients (addition, subtraction, multiplication, division, power, `tanh`, `exp`, `relu`, `sigmoid`, `log`, `sin`, `cos`).
 - Topological backpropagation.
 - `Tensor` container for vectorized elementwise operations.
 - `Neuron`, `Layer` and `MLP` classes for quickly assembling networks.
@@ -17,7 +17,7 @@ This repository implements a minimal automatic differentiation engine inspired b
 Run an example:
 
 ```bash
-python examples/xor.py --epochs 300       # XOR classification
+python examples/xor.py --epochs 300       # XOR classification (override epochs if desired)
 python examples/moons.py --epochs 500     # two-moons classification
 ```
 
