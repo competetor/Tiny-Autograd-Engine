@@ -25,8 +25,11 @@ def make_moons(n_samples: int = 100, noise: float = 0.1):
         data.append((x2, y2, 1.0))
     return data
 
-
 data = make_moons(20, noise=0.1)
+random.shuffle(data)
+split = int(0.8 * len(data))
+train_data = data[:split]
+test_data = data[split:]
 
 parser = argparse.ArgumentParser(description="two-moons training example")
 parser.add_argument(
@@ -45,7 +48,7 @@ optimizer = Adam(model.parameters(), lr=0.05)
 
 for epoch in range(args.epochs):
     total_loss = Value(0.0)
-    for x1, x2, label in data:
+    for x1, x2, label in train_data:
         y_pred = model([Value(x1), Value(x2)])
         total_loss = total_loss + (y_pred - label) ** 2
     total_loss.backward()
@@ -54,10 +57,10 @@ for epoch in range(args.epochs):
     if epoch % 10 == 0:
         print(epoch, total_loss.data)
 
-# report accuracy
+# report test accuracy
 correct = 0
-for x1, x2, label in data:
+for x1, x2, label in test_data:
     y_pred = model([Value(x1), Value(x2)]).data
     pred = 1.0 if y_pred > 0.5 else 0.0
     correct += pred == label
-print("accuracy", correct / len(data))
+print("test accuracy", correct / len(test_data))
