@@ -7,9 +7,6 @@ It is inspired by micrograd, but extends the concept into a compact deep-learnin
 
 The implementation is intentionally simple, readable, and educational — while remaining fully functional and numerically correct.
 
-✔️ 47 tests passed, 1 skipped  
-✔️ Zero runtime dependencies (NumPy optional for convenience)
-
 ---
 
 ## Key Features
