@@ -1,4 +1,5 @@
 from autograd import Tensor
+import numpy as np
 
 def test_tensor_ops():
     t1 = Tensor([1, 2])
@@ -10,6 +11,16 @@ def test_tensor_ops():
     assert t1.data[0].grad == 3
     assert t1.data[1].grad == 4
 
-if __name__ == "__main__":
-    test_tensor_ops()
-    print("All tests passed.")
+def test_numpy_bridge_roundtrip():
+    arr = np.array([[1.0, 2.0], [3.0, 4.0]])
+    t = Tensor.from_numpy(arr, requires_grad=True)
+
+    # Do a simple differentiable operation
+    out = (t * 2.0).sum()  # should be a scalar Value
+    out.backward()
+
+    # to_numpy should give us back the same numerical values
+    out_arr = t.to_numpy()
+    assert isinstance(out_arr, np.ndarray)
+    assert out_arr.shape == arr.shape
+    assert np.allclose(out_arr, arr)

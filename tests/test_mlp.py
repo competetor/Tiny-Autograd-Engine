@@ -1,8 +1,6 @@
 from autograd import Value, MLP
-import random
 
 def test_mlp_xor():
-    random.seed(0)
     model = MLP(2, [3, 1])
     data = [
         (0.0, 0.0, 0.0),
@@ -21,6 +19,3 @@ def test_mlp_xor():
             p.grad = 0.0
     preds = [1.0 if model([Value(x1), Value(x2)]).data > 0.5 else 0.0 for x1, x2, _ in data]
     assert preds == [0.0, 1.0, 1.0, 0.0]
-
-if __name__ == "__main__":
-    test_mlp_xor()
