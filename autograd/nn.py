@@ -38,7 +38,6 @@ class Module:
         with open(path, "wb") as f:
             pickle.dump(self.state_dict(), f)
 
-
 class Neuron(Module):
     def __init__(self, nin: int, nonlin: bool = True):
         self.w = [Value(random.uniform(-1, 1)) for _ in range(nin)]
@@ -55,7 +54,6 @@ class Neuron(Module):
     def parameters(self) -> List[Value]:
         return self.w + [self.b]
 
-
 class Layer(Module):
     def __init__(self, nin: int, nout: int, **kw):
         self.neurons = [Neuron(nin, **kw) for _ in range(nout)]
@@ -65,7 +63,6 @@ class Layer(Module):
 
     def parameters(self) -> List[Value]:
         return [p for n in self.neurons for p in n.parameters()]
-
 
 class MLP(Module):
     def __init__(self, nin: int, nouts: List[int]):
@@ -92,7 +89,6 @@ class MLP(Module):
         model = cls(nin, nouts)
         model.load_state_dict(weights)
         return model
-
 
 class Linear(Module):
     """
