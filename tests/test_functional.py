@@ -1,6 +1,5 @@
+# tests/test_functional.py
 from __future__ import annotations
-import math
-from autograd import Value
 from autograd.functional import grad, value_and_grad, jacobian
 
 def test_grad_and_value_and_grad():

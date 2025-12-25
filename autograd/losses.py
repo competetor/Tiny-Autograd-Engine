@@ -2,7 +2,6 @@
 from __future__ import annotations
 from typing import Union, List
 from .value import Value
-import math
 
 Number = Union[int, float]
 

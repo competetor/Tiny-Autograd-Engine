@@ -1,5 +1,7 @@
 # examples/04_multiclass_spiral_linear_net.py
-import argparse, math, random
+import argparse
+import math
+import random
 from autograd import Linear, Tensor, SGD, cross_entropy_with_logits
 
 def make_spiral(n_per_class=100, k=3, noise=0.2, seed=0):

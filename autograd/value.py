@@ -2,10 +2,10 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
-from typing import Callable, Tuple, List, Set, Optional, Dict, Any
+from typing import Callable, Tuple, List, Set, Dict
 import time
 
-from . import ops  # NEW: use the op registry for forward
+from . import ops
 
 
 class Value:

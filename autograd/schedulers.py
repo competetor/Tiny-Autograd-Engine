@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from math import cos, pi
-from typing import List, Dict, Any
+from typing import List
 
 
 class _BaseLRScheduler:

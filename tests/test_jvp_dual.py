@@ -1,6 +1,7 @@
+# tests/test_jvp_dual.py
 from __future__ import annotations
 import math
-from autograd.dual import jvp, Dual
+from autograd.dual import jvp
 
 def test_jvp_matches_directional_fd():
     # scalar function using Dual ops

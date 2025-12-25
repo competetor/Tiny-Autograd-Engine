@@ -16,7 +16,7 @@ def test_nonleaf_data_mutation_is_blocked():
 def test_stop_gradient_makes_node_mutable_and_breaks_chain():
     a = Value(2.0)
     z = (a + 1.0).tanh()
-    z.stop_gradient()      # cut graph here -> z becomes leaf
+    z.stop_gradient()      # cut graph here
     z.data = 9.0           # now allowed
 
     out = z * 2.0          # this node won't require grad (parents had requires_grad=False)

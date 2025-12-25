@@ -1,6 +1,8 @@
 # benchmarks/bench_tape_vs_value.py
 from __future__ import annotations
-import argparse, time, random
+import argparse
+import time
+import random
 import numpy as np
 from autograd import Value, MLP
 from autograd.tape import tape_backward

@@ -6,7 +6,9 @@ Run:
   python examples/09_moons_mlp.py --epochs 600 --hidden 16 --lr 0.05 --noise 0.15 --test-split 0.3 --plot
   python examples/09_moons_mlp.py --sanity  # shuffle labels to confirm chance accuracy
 """
-import argparse, math, random
+import argparse
+import math
+import random
 from typing import List, Tuple
 from autograd import MLP, Value, Adam, bce_with_logits, StepLR
 

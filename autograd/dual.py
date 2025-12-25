@@ -1,7 +1,7 @@
 # autograd/dual.py
 from __future__ import annotations
 import math
-from typing import Union, Iterable, Tuple, List, Callable
+from typing import Union, Iterable, Tuple, Callable
 
 Number = Union[int, float]
 

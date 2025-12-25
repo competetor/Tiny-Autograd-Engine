@@ -1,4 +1,4 @@
-![CI](https://github.com/competetor/Tiny-Autograd-Engine/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/competetor/Tiny-Autograd-Engine/actions/workflows/ci.yml/badge.svg?branch=main)
 
 # Tiny-Autograd-Engine
 
@@ -6,9 +6,6 @@ Tiny-Autograd-Engine is a lightweight automatic differentiation library written 
 It is inspired by micrograd, but extends the concept into a compact deep-learning framework, providing both scalar and tensor-based autodiff, neural-network layers, optimizers, scheduling utilities, dual-number forward-mode differentiation, tape-based backpropagation, and support for custom operators.
 
 The implementation is intentionally simple, readable, and educational — while remaining fully functional and numerically correct.
-
-✔️ 47 tests passed, 1 skipped  
-✔️ Zero runtime dependencies (NumPy optional for convenience)
 
 ---
 
@@ -34,15 +31,19 @@ All implemented in pure Python, making the system easy to understand and extend.
 
 ## Installation
 
-    git clone https://github.com/<you>/Tiny-Autograd-Engine.git
-    cd Tiny-Autograd-Engine
-    pip install -e .
+**Optional:** You may want to run the install inside a virtual environment (e.g., `venv` or `conda`) to keep dependencies isolated. If you want to run the tests as well, do pip install -e "[dev]." instead
 
-(Optional development tools:)
+```bash
+git clone https://github.com/competetor/Tiny-Autograd-Engine.git
+cd Tiny-Autograd-Engine
+pip install -e .
+```
 
-    pip install -e ".[dev]"
+If you also want to run the tests + graphviz, install with:
 
----
+```bash
+pip install -e ".[dev]"
+```
 
 ## Usage Examples
 
@@ -160,7 +161,7 @@ Run all tests with:
 
 Expected output:
 
-    47 passed, 1 skipped
+    47 passed, 1 skipped (graphviz installation required for it)
 
 ---
 

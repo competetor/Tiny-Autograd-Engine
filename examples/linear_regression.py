@@ -1,5 +1,6 @@
 # examples/02_linear_regression.py
-import argparse, random, math
+import argparse
+import random
 from autograd import Value, SGD, mse, StepLR
 
 def make_data(n=200, seed=0):

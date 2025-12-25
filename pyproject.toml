@@ -2,9 +2,17 @@
 name = "tiny-autograd-engine"
 version = "0.1.0"
 description = "Educational autograd engine"
-authors = [{name = "Tiny"}]
+authors = [{ name = "Tiny" }]
 requires-python = ">=3.10"
-dependencies = ["numpy"]
+dependencies = [
+    "numpy",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "graphviz",
+]
 
 [build-system]
 requires = ["setuptools>=61.0"]

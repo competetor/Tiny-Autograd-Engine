@@ -1,6 +1,5 @@
 # tests/test_broadcast.py
 from __future__ import annotations
-import math
 import pytest
 
 from autograd import Tensor, Value

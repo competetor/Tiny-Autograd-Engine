@@ -1,5 +1,4 @@
 from __future__ import annotations
-import math
 from autograd.value import Value
 from autograd.tape import tape_backward
 

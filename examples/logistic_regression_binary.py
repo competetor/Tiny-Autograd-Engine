@@ -1,5 +1,7 @@
 # examples/03_logistic_regression_binary.py
-import argparse, random, math
+import argparse
+import random
+import math
 from autograd import Value, SGD, bce_with_logits
 
 def blobs(n_per=100, seed=0):

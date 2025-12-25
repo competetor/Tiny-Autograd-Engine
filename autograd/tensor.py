@@ -1,6 +1,6 @@
 # autograd/tensor.py
 from __future__ import annotations
-from typing import Iterable, List, Union, Tuple, Any, Sequence, Callable
+from typing import List, Union, Tuple, Any, Sequence, Callable
 from .value import Value
 
 Number = Union[int, float]
