@@ -1,4 +1,4 @@
-# examples/02_linear_regression.py
+# examples/linear_regression.py
 import argparse
 import random
 from autograd import Value, SGD, mse, StepLR

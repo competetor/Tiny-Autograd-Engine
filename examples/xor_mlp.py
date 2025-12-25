@@ -1,4 +1,4 @@
-# examples/08_xor_mlp.py
+# examples/xor_mlp.py
 """
 XOR with a tiny MLP + optional decision boundary plot.
 Run:

@@ -1,4 +1,4 @@
-# examples/09_moons_mlp.py
+# examples/moons_mlp.py
 """
 Two-moons classification with train/test split, optional plotting, and a label-shuffle sanity check.
 

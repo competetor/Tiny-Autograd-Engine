@@ -1,10 +1,8 @@
 # tests/test_finite_difference.py
 from __future__ import annotations
-
 import random
 
 from autograd.value import Value
-
 
 def finite_diff(f, x: Value, eps: float = 1e-6) -> float:
     """Central difference ∂f/∂x ≈ (f(x+ε) - f(x-ε)) / (2ε)."""
@@ -14,7 +12,6 @@ def finite_diff(f, x: Value, eps: float = 1e-6) -> float:
     f2 = f().data
     x.data += eps  # restore
     return (f1 - f2) / (2 * eps)
-
 
 def test_random_scalar_expression_gradients_agree_with_fd():
     random.seed(0)

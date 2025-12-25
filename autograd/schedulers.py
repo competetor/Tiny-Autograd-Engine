@@ -1,9 +1,7 @@
 # autograd/schedulers.py
 from __future__ import annotations
-
 from math import cos, pi
 from typing import List
-
 
 class _BaseLRScheduler:
     """
@@ -31,7 +29,6 @@ class _BaseLRScheduler:
         for g, lr in zip(self.optimizer.param_groups, lrs):
             g["lr"] = float(lr)
 
-
 class StepLR(_BaseLRScheduler):
     """
     Decay LR by gamma every `step_size` steps.
@@ -46,7 +43,6 @@ class StepLR(_BaseLRScheduler):
     def get_lrs(self, epoch: int) -> List[float]:
         factor = self.gamma ** (epoch // self.step_size)
         return [base * factor for base in self.base_lrs]
-
 
 class CosineAnnealingLR(_BaseLRScheduler):
     """

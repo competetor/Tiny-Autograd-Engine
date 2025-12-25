@@ -1,4 +1,4 @@
-# examples/01_scalar_autodiff.py
+# examples/scalar_autodiff.py
 from autograd import Value
 from autograd.utils import draw_graph
 

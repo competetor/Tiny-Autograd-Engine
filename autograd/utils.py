@@ -10,7 +10,6 @@ try:
 except Exception:
     _gv = None
 
-
 def draw_graph(
     root,
     *,

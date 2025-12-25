@@ -6,7 +6,6 @@ import time
 from .value import Value
 from . import ops as _ops
 
-
 class Tape:
     """
     Compact computation tape built from Value nodes.

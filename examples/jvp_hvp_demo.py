@@ -1,4 +1,4 @@
-# examples/07_jvp_hvp_demo.py
+# examples/jvp_hvp_demo.py
 from autograd import Value
 from autograd.dual import jvp, Dual
 from autograd.higher import hvp_fd

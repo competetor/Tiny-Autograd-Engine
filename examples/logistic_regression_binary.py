@@ -1,4 +1,4 @@
-# examples/03_logistic_regression_binary.py
+# examples/logistic_regression_binary.py
 import argparse
 import random
 import math

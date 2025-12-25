@@ -96,15 +96,14 @@ def _index_get(nested: Nested, idx: Tuple[int, ...]) -> Value:
         cur = cur[i]  # type: ignore[index]
     return cur  # type: ignore[return-value]
 
-def _iter_indices(shape: Tuple[int, ...]):
-    if not shape:
-        yield ()
-    else:
-        from itertools import product
-        for idx in product(*[range(d) for d in shape]):
-            yield idx
+#def _iter_indices(shape: Tuple[int, ...]):
+#    if not shape:
+#        yield ()
+#    else:
+#        from itertools import product
+#        for idx in product(*[range(d) for d in shape]):
+#            yield idx
 
-# --- Tensor ---
 class Tensor:
     __slots__ = ("data",)
 

@@ -4,7 +4,6 @@ import pytest
 
 from autograd import Tensor, Value
 
-
 def test_scalar_broadcast_add_mul_sum():
     t = Tensor([1.0, 2.0, 3.0])
     out = t + 10  # broadcast scalar
@@ -14,7 +13,6 @@ def test_scalar_broadcast_add_mul_sum():
     grads = [v.grad for v in t.data]
     assert grads == [2.0, 2.0, 2.0]
     assert s.data == (11 + 12 + 13) * 2
-
 
 def test_row_vector_broadcast_to_matrix_and_backward():
     A = Tensor([[1.0, 2.0, 3.0],
@@ -32,7 +30,6 @@ def test_row_vector_broadcast_to_matrix_and_backward():
     grads_b = [v.grad for v in b.data]
     assert grads_b == [2.0, 2.0, 2.0]
 
-
 def test_col_vector_broadcast_to_matrix_and_backward():
     A = Tensor([[1.0, 2.0, 3.0],
                 [4.0, 5.0, 6.0]])         # (2,3)
@@ -49,7 +46,6 @@ def test_col_vector_broadcast_to_matrix_and_backward():
     grads_c = [row[0].grad for row in c.data]  # column vector
     assert grads_c == [3.0, 3.0]
 
-
 def test_sum_axis_and_mean_axis():
     A = Tensor([[1.0, 2.0, 3.0],
                 [4.0, 5.0, 6.0]])
@@ -65,7 +61,6 @@ def test_sum_axis_and_mean_axis():
     m = A.mean()
     assert isinstance(m, Value)
     assert abs(m.data - (1+2+3+4+5+6)/6) < 1e-12
-
 
 def test_broadcast_shape_mismatch_raises():
     A = Tensor([[1.0, 2.0, 3.0]])
