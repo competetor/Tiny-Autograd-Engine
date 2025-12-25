@@ -1,4 +1,5 @@
 ![CI](https://github.com/competetor/Tiny-Autograd-Engine/actions/workflows/ci.yml/badge.svg?branch=main)
+![CI](https://github.com/competetor/Tiny-Autograd-Engine/actions/workflows/ci.yml/badge.svg?branch=main)
 
 # Tiny-Autograd-Engine
 
@@ -161,6 +162,7 @@ Run all tests with:
 
 Expected output:
 
+    47 passed, 1 skipped (graphviz installation required for it)
     47 passed, 1 skipped (graphviz installation required for it)
 
 ---
