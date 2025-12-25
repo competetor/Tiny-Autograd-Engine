@@ -6,7 +6,6 @@ import math
 ForwardFn = Callable[[Tuple[float, ...]], float]
 GradFn = Callable[[int, Tuple[int, ...], List[float], List[float], List[bool]], None]
 
-
 class Op:
     """
     Small operation object holding both forward and backward rules.

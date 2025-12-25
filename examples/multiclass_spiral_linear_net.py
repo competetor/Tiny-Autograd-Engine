@@ -1,4 +1,4 @@
-# examples/04_multiclass_spiral_linear_net.py
+# examples/multiclass_spiral_linear_net.py
 import argparse
 import math
 import random

@@ -1,12 +1,10 @@
 # autograd/value.py
 from __future__ import annotations
-
 from contextlib import contextmanager
 from typing import Callable, Tuple, List, Set, Dict
 import time
 
 from . import ops
-
 
 class Value:
     """
@@ -411,7 +409,6 @@ class Value:
 
         out._backward = _backward
         return out
-
 
 @contextmanager
 def no_grad():

@@ -4,7 +4,6 @@ import re
 
 from autograd.value import Value
 
-
 def test_pre_hook_scales_upstream_grad_before_parent_update():
     # y = a * b  =>  dy/da = b, dy/db = a
     a, b = Value(2.0), Value(3.0)
@@ -20,7 +19,6 @@ def test_pre_hook_scales_upstream_grad_before_parent_update():
     y.backward()
     assert abs(a.grad - 2.0 * b.data) < 1e-12
     assert abs(b.grad - 2.0 * a.data) < 1e-12
-
 
 def test_post_hook_runs_after_parent_update_and_cant_affect_parents():
     # z = a * b + a  => dz/da = b + 1, dz/db = a
@@ -41,7 +39,6 @@ def test_post_hook_runs_after_parent_update_and_cant_affect_parents():
     assert calls["post"] >= 1
     assert abs(a.grad - (b.data + 1.0)) < 1e-12
     assert abs(b.grad - a.data) < 1e-12
-
 
 def test_backward_profile_prints_summary(capsys):
     x, y = Value(2.0), Value(3.0)

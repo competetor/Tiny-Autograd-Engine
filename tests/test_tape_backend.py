@@ -2,7 +2,6 @@ from __future__ import annotations
 from autograd.value import Value
 from autograd.tape import tape_backward
 
-
 def make_safe_expr():
     # Build a moderately rich scalar expression with safe log input
     a = Value(0.7)

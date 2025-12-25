@@ -1,4 +1,4 @@
-# examples/05_tensor_ops_quickstart.py
+# examples/tensor_ops_quickstart.py
 from autograd import Tensor
 
 def main():

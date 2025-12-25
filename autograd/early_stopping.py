@@ -1,8 +1,6 @@
 # autograd/early_stopping.py
 from __future__ import annotations
-
 from typing import Optional
-
 
 class EarlyStopping:
     def __init__(self, patience: int = 10, min_delta: float = 0.0, mode: str = "min"):

@@ -7,12 +7,10 @@ import numpy as np
 from autograd import Value, MLP
 from autograd.tape import tape_backward
 
-
 def seed_all(seed: int = 0):
     random.seed(seed)
     if np is not None:
         np.random.seed(seed)
-
 
 def timeit(fn, warmup: int = 1, reps: int = 5):
     for _ in range(warmup):
@@ -67,7 +65,6 @@ def build_mlp_task(nin=32, widths=(64, 64, 64, 1), batch=128, steps=3):
 
     return model, xs, timeit(classic, reps=steps), timeit(tape, reps=steps)
 
-
 def main():
     p = argparse.ArgumentParser(description="Tiny Autograd: tape vs classic backward")
     p.add_argument("--chain-len", type=int, default=20000, help="length of scalar op chain")
@@ -97,7 +94,6 @@ def main():
     print(f"tape backward   : {t_tape_mlp*1000:.2f} ms/iter")
     if t_tape_mlp > 0:
         print(f"speedup         : {t_classic_mlp / t_tape_mlp:.2f}×")
-
 
 if __name__ == "__main__":
     main()

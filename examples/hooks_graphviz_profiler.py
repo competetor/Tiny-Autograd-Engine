@@ -1,4 +1,4 @@
-# examples/06_hooks_graphviz_profiler.py
+# examples/hooks_graphviz_profiler.py
 from autograd import Value
 from autograd.utils import draw_graph
 
