@@ -154,7 +154,7 @@ Run all tests with:
 
 Expected output:
 
-    47 passed, 1 skipped
+    47 passed, 1 skipped (graphviz installation required for it)
 
 ---
 
