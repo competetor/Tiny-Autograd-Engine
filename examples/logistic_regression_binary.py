@@ -1,5 +1,7 @@
 # examples/03_logistic_regression_binary.py
-import argparse, random, math
+import argparse
+import random
+import math
 from autograd import Value, SGD, bce_with_logits
 
 def blobs(n_per=100, seed=0):
@@ -8,11 +10,13 @@ def blobs(n_per=100, seed=0):
     for _ in range(n_per):
         r, t = random.uniform(0.0, 1.0), random.uniform(0, math.pi)
         x1, x2 = r * math.cos(t), r * math.sin(t)
-        X.append((Value(x1), Value(x2))); Y.append(Value(0.0))
+        X.append((Value(x1), Value(x2)))
+        Y.append(Value(0.0))
     for _ in range(n_per):
         r, t = random.uniform(0.0, 1.0), random.uniform(math.pi, 2*math.pi)
         x1, x2 = r * math.cos(t) + 0.5, r * math.sin(t) + 0.2
-        X.append((Value(x1), Value(x2))); Y.append(Value(1.0))
+        X.append((Value(x1), Value(x2)))
+        Y.append(Value(1.0))
     return X, Y
 
 def main():

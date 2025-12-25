@@ -1,6 +1,6 @@
 # autograd/tensor.py
 from __future__ import annotations
-from typing import Iterable, List, Union, Tuple, Any, Sequence, Callable
+from typing import List, Union, Tuple, Any, Sequence, Callable
 from .value import Value
 
 Number = Union[int, float]
@@ -217,7 +217,8 @@ class Tensor:
         a_b = _broadcast_to_data(a_data, sa, out_shape)
         b_b = _broadcast_to_data(b_data, sb, out_shape)
         def cast(v: Leaf, const: bool) -> Value:
-            if isinstance(v, Value): return v
+            if isinstance(v, Value):
+                return v
             return _as_const(v) if const else _as_leaf(v)
         out = _zip_map_nested(a_b, b_b, lambda aa, bb: fn(cast(aa, False), cast(bb, True)))
         return Tensor(out)
@@ -312,22 +313,27 @@ class Tensor:
             for v in flat[1:]:
                 acc = acc + v
             return acc
-        if isinstance(axis, int): axes = (axis,)
-        else: axes = tuple(axis)
+        if isinstance(axis, int):
+            axes = (axis,)
+        else:
+            axes = tuple(axis)
         axes = tuple(a if a >= 0 else a + len(shape) for a in axes)
         if any(a < 0 or a >= len(shape) for a in axes):
             raise ValueError("axis out of range")
         def reduce_axis0(lst: List[Nested]) -> Nested:
-            if len(lst) == 1: return lst[0]
+            if len(lst) == 1:
+                return lst[0]
             acc = lst[0]
             for el in lst[1:]:
                 acc = _zip_map_nested(acc, el, lambda x, y: _as_leaf(x) + _as_leaf(y))
             return acc
         def sum_along(d: Nested, ax: int) -> Nested:
             if ax == 0:
-                if not isinstance(d, list): return d
+                if not isinstance(d, list):
+                    return d
                 return reduce_axis0(d)
-            if not isinstance(d, list): raise ValueError("axis too deep for data")
+            if not isinstance(d, list):
+                raise ValueError("axis too deep for data")
             return [sum_along(el, ax - 1) for el in d]  # type: ignore[list-item]
         axes_sorted = sorted(set(axes))
         out = data
@@ -336,22 +342,28 @@ class Tensor:
         if keepdims:
             for _ in axes_sorted:
                 out = [out]  # type: ignore[list-item]
-        if _is_value_or_number(out): return _as_leaf(out)
+        if _is_value_or_number(out):
+            return _as_leaf(out)
         return Tensor(out)
 
     def mean(self, axis: Union[None, int, Sequence[int]] = None, keepdims: bool = False):
         if axis is None:
             total = self.sum()
             count = 1
-            for d in self.shape: count *= d
+            for d in self.shape:
+                count *= d
             return total / count
-        if isinstance(axis, int): axes = (axis,)
-        else: axes = tuple(axis)
+        if isinstance(axis, int):
+            axes = (axis,)
+        else:
+            axes = tuple(axis)
         axes = tuple(a if a >= 0 else a + len(self.shape) for a in axes)
         count = 1
-        for a in set(axes): count *= self.shape[a]
+        for a in set(axes):
+            count *= self.shape[a]
         s = self.sum(axis=axes, keepdims=keepdims)
-        if isinstance(s, Value): return s / count
+        if isinstance(s, Value):
+            return s / count
         return s * (1.0 / count)
 
     # --- reshape & transpose ---
@@ -360,9 +372,11 @@ class Tensor:
             shape = tuple(shape[0])  # type: ignore[assignment]
         flat = _flatten_refs(self.data)
         total = 1
-        for d in self.shape: total *= d
+        for d in self.shape:
+            total *= d
         total_new = 1
-        for d in shape: total_new *= d
+        for d in shape:
+            total_new *= d
         if total != total_new:
             raise ValueError(f"cannot reshape {self.shape} into {shape} (different sizes)")
         new_nested = _build_from_flat(flat, tuple(shape))

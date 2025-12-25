@@ -11,7 +11,8 @@ def _as_value(x: Union[Value, Number]) -> Value:
 def grad(f: Callable[..., Value]) -> Callable[..., List[float]]:
     def wrapper(*args):
         xs = [_as_value(a) for a in args]
-        for x in xs: x.grad = 0.0
+        for x in xs:
+            x.grad = 0.0
         out = f(*xs)
         if not isinstance(out, Value):
             raise TypeError("f must return a Value")
@@ -22,7 +23,8 @@ def grad(f: Callable[..., Value]) -> Callable[..., List[float]]:
 def value_and_grad(f: Callable[..., Value]) -> Callable[..., Tuple[float, List[float]]]:
     def wrapper(*args):
         xs = [_as_value(a) for a in args]
-        for x in xs: x.grad = 0.0
+        for x in xs:
+            x.grad = 0.0
         out = f(*xs)
         if not isinstance(out, Value):
             raise TypeError("f must return a Value")
@@ -33,13 +35,15 @@ def value_and_grad(f: Callable[..., Value]) -> Callable[..., Tuple[float, List[f
 def jacobian(f: Callable[..., Union[Value, Iterable[Value]]]) -> Callable[..., List[List[float]]]:
     def wrapper(*args):
         xs = [_as_value(a) for a in args]
-        for x in xs: x.grad = 0.0
+        for x in xs:
+            x.grad = 0.0
         ys = f(*xs)
         ys_list = list(ys) if not isinstance(ys, Value) else [ys]
         J: List[List[float]] = []
         for i, yi in enumerate(ys_list):
             # retain graph until the last backward
-            for x in xs: x.grad = 0.0
+            for x in xs:
+                x.grad = 0.0
             yi.backward(retain_graph=(i != len(ys_list) - 1))
             J.append([x.grad for x in xs])
         return J

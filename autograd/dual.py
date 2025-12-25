@@ -1,7 +1,7 @@
 # autograd/dual.py
 from __future__ import annotations
 import math
-from typing import Union, Iterable, Tuple, List, Callable
+from typing import Union, Iterable, Tuple, Callable
 
 Number = Union[int, float]
 
@@ -96,7 +96,8 @@ class Dual:
 
 
 def jvp(f: Callable[..., Dual], x: Iterable[Number], v: Iterable[Number]) -> Tuple[float, float]:
-    xs = list(x); vs = list(v)
+    xs = list(x)
+    vs = list(v)
     if len(xs) != len(vs):
         raise ValueError("x and v must have same length")
     dx = [Dual(xi, vi) for xi, vi in zip(xs, vs)]

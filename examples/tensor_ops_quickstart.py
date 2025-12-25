@@ -13,7 +13,8 @@ def main():
     print("sum(A+b)/2 =", s.data)
     print("d/dA is ones ->", [[v.grad for v in row] for row in A.data])  # grads of A
 
-    A.zero_grad(); b.zero_grad()
+    A.zero_grad()
+    b.zero_grad()
     y = A @ v                              # (2,)
     z = y.sum()
     z.backward()

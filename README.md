@@ -1,4 +1,5 @@
 ![CI](https://github.com/competetor/Tiny-Autograd-Engine/actions/workflows/ci.yml/badge.svg?branch=main)
+![CI](https://github.com/competetor/Tiny-Autograd-Engine/actions/workflows/ci.yml/badge.svg?branch=main)
 
 # Tiny-Autograd-Engine
 
@@ -31,13 +32,20 @@ All implemented in pure Python, making the system easy to understand and extend.
 
 ## Installation
 
-**Optional:** You may want to run the install inside a virtual environment (e.g., `venv` or `conda`) to keep dependencies isolated.
+**Optional:** You may want to run the install inside a virtual environment (e.g., `venv` or `conda`) to keep dependencies isolated. If you want to run the tests as well, do pip install -e "[dev]." instead
 
 ```bash
 git clone https://github.com/competetor/Tiny-Autograd-Engine.git
 cd Tiny-Autograd-Engine
 pip install -e .
 ```
+
+If you also want to run the tests + graphviz, install with:
+
+```bash
+pip install -e ".[dev]"
+```
+
 ## Usage Examples
 
 ### Scalar Autodiff (`Value`)
@@ -154,6 +162,7 @@ Run all tests with:
 
 Expected output:
 
+    47 passed, 1 skipped (graphviz installation required for it)
     47 passed, 1 skipped (graphviz installation required for it)
 
 ---

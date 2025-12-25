@@ -65,11 +65,16 @@ def _maybe_plot(model):
 
     plt.figure(figsize=(5, 5))
     plt.contourf(xs, ys, Z, levels=50, alpha=0.7)
-    if X0: plt.scatter([p[0] for p in X0], [p[1] for p in X0], c="black", s=80, label="class 0")
-    if X1: plt.scatter([p[0] for p in X1], [p[1] for p in X1], c="white", edgecolors="black", s=80, label="class 1")
-    plt.xlim(-0.5, 1.5); plt.ylim(-0.5, 1.5)
-    plt.legend(loc="best"); plt.title("XOR decision boundary")
-    plt.tight_layout(); plt.show()
+    if X0:
+        plt.scatter([p[0] for p in X0], [p[1] for p in X0], c="black", s=80, label="class 0")
+    if X1:
+        plt.scatter([p[0] for p in X1], [p[1] for p in X1], c="white", edgecolors="black", s=80, label="class 1")
+    plt.xlim(-0.5, 1.5)
+    plt.ylim(-0.5, 1.5)
+    plt.legend(loc="best")
+    plt.title("XOR decision boundary")
+    plt.tight_layout()
+    plt.show()
 
 def main():
     ap = argparse.ArgumentParser()

@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pickle
 import random
-from typing import List, Iterable, Union
+from typing import List, Union
 
 from .value import Value
 from .tensor import Tensor
