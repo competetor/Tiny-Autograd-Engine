@@ -34,12 +34,14 @@ def cross_entropy_with_logits(logits: List[Value], target_ix: int) -> Value:
         raise IndexError("target_ix out of range")
 
     # float max for stability
-    m = max(l.data for l in logits)
+    m = max(logit.data for logit in logits)
+
     # sum exp(logit - m) with Value ops
     sum_exp = None
-    for l in logits:
-        term = (l - m).exp()
+    for logit in logits:
+        term = (logit - m).exp()
         sum_exp = term if sum_exp is None else (sum_exp + term)
+
     lse = sum_exp.log() + m
     return lse - logits[target_ix]
 

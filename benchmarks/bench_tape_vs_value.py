@@ -54,13 +54,15 @@ def build_mlp_task(nin=32, widths=(64, 64, 64, 1), batch=128, steps=3):
         total = Value(0.0, requires_grad=True)
         for x in xs:
             total = total + model(x)
-        for p in model.parameters(): p.grad = 0.0
+        for p in model.parameters():
+            p.grad = 0.0
         total.backward()
     def tape():
         total = Value(0.0, requires_grad=True)
         for x in xs:
             total = total + model(x)
-        for p in model.parameters(): p.grad = 0.0
+        for p in model.parameters():
+            p.grad = 0.0
         tape_backward(total)
 
     return model, xs, timeit(classic, reps=steps), timeit(tape, reps=steps)

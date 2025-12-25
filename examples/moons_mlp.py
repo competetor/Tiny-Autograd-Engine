@@ -19,20 +19,25 @@ def make_moons(n_samples=400, noise=0.1, seed=0) -> Tuple[List[Tuple[float,float
     for _ in range(n):
         t = random.uniform(0.0, math.pi)
         r = 1.0 + random.gauss(0, noise)
-        X.append((r * math.cos(t), r * math.sin(t))); Y.append(0.0)
+        X.append((r * math.cos(t), r * math.sin(t)))
+        Y.append(0.0)
     for _ in range(n):
         t = random.uniform(0.0, math.pi)
         r = 1.0 + random.gauss(0, noise)
-        X.append((1.0 - r * math.cos(t), -r * math.sin(t) - 0.5)); Y.append(1.0)
+        X.append((1.0 - r * math.cos(t), -r * math.sin(t) - 0.5))
+        Y.append(1.0)
     return X, Y
 
 def split(X, Y, test_frac=0.3, seed=0):
     idx = list(range(len(X)))
     random.Random(seed).shuffle(idx)
     cut = int(len(X) * (1 - test_frac))
-    tr = idx[:cut]; te = idx[cut:]
-    Xtr = [X[i] for i in tr]; Ytr = [Y[i] for i in tr]
-    Xte = [X[i] for i in te]; Yte = [Y[i] for i in te]
+    tr = idx[:cut]
+    te = idx[cut:]
+    Xtr = [X[i] for i in tr]
+    Ytr = [Y[i] for i in tr]
+    Xte = [X[i] for i in te]
+    Yte = [Y[i] for i in te]
     return Xtr, Ytr, Xte, Yte
 
 def acc_on(model, X, Y) -> float:
@@ -50,7 +55,8 @@ def maybe_plot(model, X, Y):
     except Exception:
         print("[plot] matplotlib not installed; skipping.")
         return
-    xs = [p[0] for p in X]; ys = [p[1] for p in X]
+    xs = [p[0] for p in X]
+    ys = [p[1] for p in X]
     pad = 0.5
     gx = np.linspace(min(xs)-pad, max(xs)+pad, 300)
     gy = np.linspace(min(ys)-pad, max(ys)+pad, 300)
@@ -63,10 +69,15 @@ def maybe_plot(model, X, Y):
     X0 = [p for p, y in zip(X, Y) if y == 0.0]
     X1 = [p for p, y in zip(X, Y) if y == 1.0]
     plt.figure(figsize=(6,5))
-    cs = plt.contourf(gx, gy, Z, levels=50, alpha=0.7)
-    if X0: plt.scatter([p[0] for p in X0], [p[1] for p in X0], c="black", s=12, label="class 0")
-    if X1: plt.scatter([p[0] for p in X1], [p[1] for p in X1], c="white", edgecolors="black", s=12, label="class 1")
-    plt.legend(); plt.title("Two Moons decision boundary"); plt.tight_layout(); plt.show()
+    plt.contourf(gx, gy, Z, levels=50, alpha=0.7)
+    if X0:
+        plt.scatter([p[0] for p in X0], [p[1] for p in X0], c="black", s=12, label="class 0")
+    if X1:
+        plt.scatter([p[0] for p in X1], [p[1] for p in X1], c="white", edgecolors="black", s=12, label="class 1")
+    plt.legend()
+    plt.title("Two Moons decision boundary")
+    plt.tight_layout()
+    plt.show()
 
 def main():
     ap = argparse.ArgumentParser()

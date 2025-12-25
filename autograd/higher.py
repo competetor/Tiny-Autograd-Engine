@@ -11,7 +11,8 @@ def grad_of(f: Callable[..., Value], xs: List[float]) -> List[float]:
     out = f(*vals)
     if not isinstance(out, Value):
         raise TypeError("f must return a Value")
-    for v in vals: v.grad = 0.0
+    for v in vals:
+        v.grad = 0.0
     out.backward()
     return [v.grad for v in vals]
 
@@ -26,7 +27,8 @@ def hvp_fd(
         H v ≈ (∇f(x+εv) - ∇f(x-εv)) / (2ε)
     Robust and works for any function expressed with Value ops.
     """
-    x = list(x); v = list(v)
+    x = list(x)
+    v = list(v)
     if len(x) != len(v):
         raise ValueError("x and v must have same length")
     x_plus  = [xi + eps * vi for xi, vi in zip(x, v)]

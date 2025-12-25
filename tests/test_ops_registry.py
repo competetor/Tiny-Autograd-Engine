@@ -4,7 +4,9 @@ from autograd.value import Value
 from autograd.tape import tape_backward, Tape
 
 def make_expr():
-    a = Value(0.7); b = Value(-1.3); c = Value(2.2)
+    a = Value(0.7)
+    b = Value(-1.3)
+    c = Value(2.2)
     # includes many ops supported by the registry
     out = ((a * b + c).tanh()
            + (a ** 2) * 0.3

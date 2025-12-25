@@ -13,7 +13,8 @@ def make_spiral(n_per_class=100, k=3, noise=0.2, seed=0):
             t = 1.75 * j + 4.0 * r + random.gauss(0, noise)
             x1 = r * math.sin(t)
             x2 = r * math.cos(t)
-            X.append([x1, x2]); Y.append(j)
+            X.append([x1, x2])
+            Y.append(j)
     return X, Y
 
 def tanh_tensor(t: Tensor) -> Tensor:

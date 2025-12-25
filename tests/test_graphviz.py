@@ -1,12 +1,10 @@
 # tests/test_graphviz.py
 from __future__ import annotations
 import pytest
-
-graphviz = pytest.importorskip("graphviz")  # skip if the python package isn't installed
-
 from autograd.value import Value
 from autograd.utils import draw_graph
 
+graphviz = pytest.importorskip("graphviz")  # skip if the python package isn't installed
 
 def test_draw_graph_builds_dot_without_rendering():
     # small graph

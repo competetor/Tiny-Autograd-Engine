@@ -96,7 +96,8 @@ class Dual:
 
 
 def jvp(f: Callable[..., Dual], x: Iterable[Number], v: Iterable[Number]) -> Tuple[float, float]:
-    xs = list(x); vs = list(v)
+    xs = list(x)
+    vs = list(v)
     if len(xs) != len(vs):
         raise ValueError("x and v must have same length")
     dx = [Dual(xi, vi) for xi, vi in zip(xs, vs)]
