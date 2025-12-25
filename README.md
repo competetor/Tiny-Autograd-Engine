@@ -31,7 +31,7 @@ All implemented in pure Python, making the system easy to understand and extend.
 
 ## Installation
 
-    git clone https://github.com/<you>/Tiny-Autograd-Engine.git
+    git clone https://github.com/competetor/Tiny-Autograd-Engine.git
     cd Tiny-Autograd-Engine
     pip install -e .
 
