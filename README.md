@@ -1,5 +1,4 @@
 ![CI](https://github.com/competetor/Tiny-Autograd-Engine/actions/workflows/ci.yml/badge.svg?branch=main)
-![CI](https://github.com/competetor/Tiny-Autograd-Engine/actions/workflows/ci.yml/badge.svg?branch=main)
 
 # Tiny-Autograd-Engine
 
