@@ -5,7 +5,7 @@
 Tiny-Autograd-Engine is a lightweight automatic differentiation library written entirely in Python.  
 It is inspired by micrograd, but extends the concept into a compact deep-learning framework, providing both scalar and tensor-based autodiff, neural-network layers, optimizers, scheduling utilities, dual-number forward-mode differentiation, tape-based backpropagation, and support for custom operators.
 
-The implementation is intentionally simple, readable, and educational — while remaining fully functional and numerically correct.
+The implementation is intentionally simple, readable, and educational while remaining fully functional and numerically correct.
 
 ---
 
