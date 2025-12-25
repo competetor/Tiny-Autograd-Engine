@@ -31,7 +31,7 @@ All implemented in pure Python, making the system easy to understand and extend.
 
 ## Installation
 
-**Optional:** You may want to run the install inside a virtual environment (e.g., `venv` or `conda `) to keep dependencies isolated.
+**Optional:** You may want to run the install inside a virtual environment (e.g., `venv` or `conda`) to keep dependencies isolated.
 
 ```bash
 git clone https://github.com/competetor/Tiny-Autograd-Engine.git
