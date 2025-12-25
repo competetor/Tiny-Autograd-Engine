@@ -63,10 +63,8 @@ class Op:
             )
         self.grad_fn(i, parents, data, grads, requires)
 
-
 # Global registry: string op-code -> Op object.
 _OPS: Dict[str, Op] = {}
-
 
 def _register(
     name: str,
@@ -86,7 +84,6 @@ def _register(
         pretty_name=pretty_name,
     )
 
-
 # ---------------------------------------------------------------------------
 # Primitive grad rules
 # ---------------------------------------------------------------------------
@@ -94,8 +91,7 @@ def _register(
 def _add_forward(xs: Tuple[float, ...]) -> float:
     a, b = xs
     return a + b
-
-
+    
 def _add_grad(
     i: int,
     parents: Tuple[int, ...],
@@ -112,11 +108,9 @@ def _add_grad(
     if requires[b]:
         grads[b] += g
 
-
 def _mul_forward(xs: Tuple[float, ...]) -> float:
     a, b = xs
     return a * b
-
 
 def _mul_grad(
     i: int,
@@ -134,11 +128,9 @@ def _mul_grad(
     if requires[b]:
         grads[b] += data[a] * g
 
-
 def _neg_forward(xs: Tuple[float, ...]) -> float:
     (a,) = xs
     return -a
-
 
 def _neg_grad(
     i: int,
@@ -154,11 +146,9 @@ def _neg_grad(
     if requires[a]:
         grads[a] -= g
 
-
 def _relu_forward(xs: Tuple[float, ...]) -> float:
     (a,) = xs
     return a if a > 0.0 else 0.0
-
 
 def _relu_grad(
     i: int,
@@ -174,11 +164,9 @@ def _relu_grad(
     if requires[a]:
         grads[a] += (1.0 if data[i] > 0.0 else 0.0) * g
 
-
 def _tanh_forward(xs: Tuple[float, ...]) -> float:
     (a,) = xs
     return math.tanh(a)
-
 
 def _tanh_grad(
     i: int,
@@ -195,7 +183,6 @@ def _tanh_grad(
         t = data[i]  # tanh output
         grads[a] += (1.0 - t * t) * g
 
-
 def _sigmoid_forward(xs: Tuple[float, ...]) -> float:
     (a,) = xs
     # standard numerically-stable-ish logistic
@@ -205,7 +192,6 @@ def _sigmoid_forward(xs: Tuple[float, ...]) -> float:
     else:
         e = math.exp(a)
         return e / (1.0 + e)
-
 
 def _sigmoid_grad(
     i: int,
@@ -222,11 +208,9 @@ def _sigmoid_grad(
         s = data[i]
         grads[a] += (s * (1.0 - s)) * g
 
-
 def _exp_forward(xs: Tuple[float, ...]) -> float:
     (a,) = xs
     return math.exp(a)
-
 
 def _exp_grad(
     i: int,
@@ -242,11 +226,9 @@ def _exp_grad(
     if requires[a]:
         grads[a] += data[i] * g  # out == exp(a)
 
-
 def _log_forward(xs: Tuple[float, ...]) -> float:
     (a,) = xs
     return math.log(a)
-
 
 def _log_grad(
     i: int,
@@ -262,11 +244,9 @@ def _log_grad(
     if requires[a]:
         grads[a] += (1.0 / data[a]) * g
 
-
 def _sin_forward(xs: Tuple[float, ...]) -> float:
     (a,) = xs
     return math.sin(a)
-
 
 def _sin_grad(
     i: int,
@@ -282,11 +262,9 @@ def _sin_grad(
     if requires[a]:
         grads[a] += math.cos(data[a]) * g
 
-
 def _cos_forward(xs: Tuple[float, ...]) -> float:
     (a,) = xs
     return math.cos(a)
-
 
 def _cos_grad(
     i: int,
@@ -302,11 +280,9 @@ def _cos_grad(
     if requires[a]:
         grads[a] += -math.sin(data[a]) * g
 
-
 def _pow_forward(power: float, xs: Tuple[float, ...]) -> float:
     (a,) = xs
     return a ** power
-
 
 def _pow_grad(
     power: float,
@@ -322,8 +298,7 @@ def _pow_grad(
         return
     if requires[a]:
         grads[a] += (power * (data[a] ** (power - 1.0))) * g
-
-
+        
 # Register primitive ops (fixed names).
 _register(
     "+",
@@ -456,7 +431,6 @@ def is_supported(op: str) -> bool:
         return True
     return False
 
-
 def _get_pow_exponent(op: str) -> float:
     try:
         return float(op[2:])
@@ -464,7 +438,6 @@ def _get_pow_exponent(op: str) -> float:
         raise NotImplementedError(
             f"ops: malformed power op {op!r}"
         ) from exc
-
 
 def _get_op(op: str) -> Op:
     try:
@@ -514,7 +487,6 @@ def apply_forward(op: str, parents_data: Tuple[float, ...]) -> float:
 
     op_obj = _get_op(op)
     return op_obj.apply_forward(parents_data)
-
 
 def apply_grad(
     op: str,
