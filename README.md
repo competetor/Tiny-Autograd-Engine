@@ -35,12 +35,6 @@ All implemented in pure Python, making the system easy to understand and extend.
     cd Tiny-Autograd-Engine
     pip install -e .
 
-(Optional development tools:)
-
-    pip install -e ".[dev]"
-
----
-
 ## Usage Examples
 
 ### Scalar Autodiff (`Value`)
