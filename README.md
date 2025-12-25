@@ -161,8 +161,7 @@ Run all tests with:
 
 Expected output:
 
-    47 passed, 1 skipped (graphviz installation required for it)
-    47 passed, 1 skipped (graphviz installation required for it)
+    47 passed, 1 skipped (graphviz installation required for it)   
 
 ---
 
