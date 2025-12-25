@@ -37,7 +37,7 @@ All implemented in pure Python, making the system easy to understand and extend.
 git clone https://github.com/competetor/Tiny-Autograd-Engine.git
 cd Tiny-Autograd-Engine
 pip install -e .
-
+```
 ## Usage Examples
 
 ### Scalar Autodiff (`Value`)
