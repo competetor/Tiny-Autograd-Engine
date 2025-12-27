@@ -20,7 +20,6 @@ def timeit(fn, warmup: int = 1, reps: int = 5):
         fn()
     return (time.perf_counter() - t0) / reps
 
-
 def build_long_chain(n: int = 20_000):
     # single-scalar chain: plenty of ops to stress the engine
     x = Value(0.1)
@@ -41,7 +40,6 @@ def bench_chain(n: int):
         out.grad = 0.0
         tape_backward(out)
     return timeit(classic), timeit(tape)
-
 
 def build_mlp_task(nin=32, widths=(64, 64, 64, 1), batch=128, steps=3):
     seed_all(0)
